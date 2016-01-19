@@ -206,6 +206,11 @@ epiviz.ui.charts.Visualization = function(id, container, properties) {
   // Events
 
   /**
+   *@type {epiviz.events.Event}
+   * @private
+   */
+  this._updateWidth = new epiviz.events.Event();
+  /**
    * @type {epiviz.events.Event.<epiviz.ui.charts.VisEventArgs.<epiviz.ui.charts.VisObject>>}
    * @protected
    */
@@ -860,6 +865,11 @@ epiviz.ui.charts.Visualization.prototype.transformData = function(range, data) {
 };
 
 /* Events */
+
+/**
+ * @returns {epiviz.events.Event}
+ */
+epiviz.ui.charts.Visualization.prototype.onUpdateWidth = function() { return this._updateWidth; };
 
 /**
  * @returns {epiviz.events.Event.<epiviz.ui.charts.VisEventArgs.<epiviz.ui.charts.VisObject>>}
