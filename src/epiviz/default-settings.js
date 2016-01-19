@@ -59,6 +59,7 @@ epiviz.Config.SETTINGS = {
         'epiviz.ui.charts.decoration.SaveChartButton',
         'epiviz.ui.charts.decoration.CustomSettingsButton',
         'epiviz.ui.charts.decoration.EditCodeButton',
+        'epiviz.ui.charts.decoration.UpdateWidthButton',
 
         'epiviz.ui.charts.decoration.ChartColorsButton',
         'epiviz.ui.charts.decoration.ChartLoaderAnimation',

@@ -332,6 +332,7 @@ if (array_key_exists('debug', $_GET) && $_GET['debug'] == 'true') {
     <script src="src/epiviz/ui/charts/decoration/toggle-tooltip-button.js"></script>
     <script src="src/epiviz/ui/charts/decoration/code-button.js"></script>
     <script src="src/epiviz/ui/charts/decoration/edit-code-button.js"></script>
+    <script src="src/epiviz/ui/charts/decoration/update-width-button.js"></script>
     <script src="src/epiviz/ui/charts/decoration/marker-code-button.js"></script>
     <script src="src/epiviz/ui/charts/decoration/chart-filter-code-button.js"></script>
     <script src="src/epiviz/ui/charts/decoration/hierarchy-filter-code-button.js"></script>
