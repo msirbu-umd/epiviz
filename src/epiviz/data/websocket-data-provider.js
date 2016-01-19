@@ -114,6 +114,8 @@ epiviz.data.WebsocketDataProvider.prototype._onSocketClose = function () {
  */
 epiviz.data.WebsocketDataProvider.prototype._sendMessage = function (message) {
   if (this.connected() && this._socket.readyState) {
+    console.log("OKAY WE CONNECTED AND FIRING");
+    console.log(message);
     this._socket.send(message);
   } else {
     this._requestsStack.push(message);
@@ -216,9 +218,18 @@ epiviz.data.WebsocketDataProvider.prototype.connected = function () {
  * @override
  */
 epiviz.data.WebsocketDataProvider.prototype.getData = function (request, callback) {
+
   var message = JSON.stringify(request.raw());
   this._callbacks[request.id()] = callback;
+  this._sendMessage(message);
+};
 
+epiviz.data.WebsocketDataProvider.prototype.updateWidth = function (request, callback) {
+
+  var message = JSON.stringify(request.raw());
+  this._callbacks[request.id()] = callback;
+  console.log("We in the websocket! updateWidth");
+  //console.log(message);
   this._sendMessage(message);
 };
 

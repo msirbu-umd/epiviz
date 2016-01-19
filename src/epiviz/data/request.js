@@ -57,6 +57,7 @@ epiviz.data.Request.Action = {
 
   GET_HIERARCHY: 'getHierarchy',
   PROPAGATE_HIERARCHY_CHANGES: 'propagateHierarchyChanges',
+  UPDATE_WIDTH: 'updateWidth',
 
   // UI actions
   ADD_MEASUREMENTS: 'addMeasurements',
@@ -70,7 +71,8 @@ epiviz.data.Request.Action = {
   NAVIGATE: 'navigate',
   REDRAW: 'redraw',
   GET_CURRENT_LOCATION: 'getCurrentLocation',
-  WRITE_DEBUG_MSG: 'writeMsg'  
+  WRITE_DEBUG_MSG: 'writeMsg'
+
 };
 
 /**
@@ -349,4 +351,18 @@ epiviz.data.Request.propagateHierarchyChanges = function(datasourceGroup, select
   });
 };
 
-
+epiviz.data.Request.updateWidthRequest = function(e){
+  //console.log("inside request");
+  //console.log(e);
+  /*console.log(e.id);
+  console.log(e.args);
+  console.log(e.args["min"]);
+  console.log(e.args["max"]);*/
+  return epiviz.data.Request.createRequest({
+    version: epiviz.EpiViz.VERSION,
+    action: epiviz.data.Request.Action.UPDATE_WIDTH,
+    chartId: e.id,
+    min: e.args["min"],
+    max: e.args["max"]
+  });
+};

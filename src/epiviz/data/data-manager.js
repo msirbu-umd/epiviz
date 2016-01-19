@@ -452,6 +452,25 @@ epiviz.data.DataManager.prototype.propagateHierarchyChanges = function(chartVisC
   }
 };
 
+epiviz.data.DataManager.prototype.updateWidth = function(e) {
+  //alert("YEAH -- In data-manager!!s");
+  //console.log("In Data Manager");
+  //console.log(e);
+  //console.log("--------");
+  this._dataProviderFactory.foreach(function(provider){
+    //console.log("THE PROVIDER IS ")
+    console.log(provider);
+    //console.log(e);
+   // provider.getData(x = epiviz.data.Request.updateWidthRequest(e), function(response){
+    provider.updateWidth(x = epiviz.data.Request.updateWidthRequest(e), function(response){
+      console.log(response);
+      //console.log(x);
+      //console.log(response);
+    });
+  });
+};
+
+
 
 /**
  * @param {function(Array)} callback

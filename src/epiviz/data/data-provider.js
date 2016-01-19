@@ -95,10 +95,15 @@ epiviz.data.DataProvider.prototype.id = function() { return this._id; };
  * @param {function(epiviz.data.Response<*>)} callback
  */
 epiviz.data.DataProvider.prototype.getData = function(request, callback) {
+  //alert("YEAH DP!!");
   callback(epiviz.data.Response.fromRawObject({
     requestId: request.id(),
     data: null
   }));
+};
+
+epiviz.data.DataProvider.prototype.updateWidth = function(request, callback) {
+    console.log("This is a stub data-provider class");
 };
 
 /**
