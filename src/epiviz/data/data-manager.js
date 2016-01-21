@@ -457,13 +457,21 @@ epiviz.data.DataManager.prototype.updateWidth = function(e) {
   //console.log("In Data Manager");
   //console.log(e);
   //console.log("--------");
+  var self = this;
+
   this._dataProviderFactory.foreach(function(provider){
     //console.log("THE PROVIDER IS ")
     console.log(provider);
     //console.log(e);
    // provider.getData(x = epiviz.data.Request.updateWidthRequest(e), function(response){
     provider.updateWidth(x = epiviz.data.Request.updateWidthRequest(e), function(response){
+      console.log("THE RESPONSE IS!");
       console.log(response);
+      console.log(response.data());
+      self.clearDatasourceGroupCache(response.data());
+
+      var result = new epiviz.events.EventResult();
+      self._requestRedraw.notify(result);
       //console.log(x);
       //console.log(response);
     });
@@ -709,6 +717,8 @@ epiviz.data.DataManager.prototype._registerProviderClearDatasourceGroupCache = f
   this._dataProviderFactory.foreach(function(/** @type {epiviz.data.DataProvider} */ provider) {
     provider.onRequestClearDatasourceGroupCache().addListener(new epiviz.events.EventListener(
       function(e) {
+        console.log("I HAVE BEEN SUMMONED HERE! AT LAST!");
+        console.log(e);
         self.clearDatasourceGroupCache(e.datasourceGroup);
         e.result.success = true;
       }));

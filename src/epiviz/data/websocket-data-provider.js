@@ -202,6 +202,9 @@ epiviz.data.WebsocketDataProvider.prototype._fireEvent = function(event, args) {
     return;
   }
 
+  console.log("._fireEvent");
+  console.log(event);
+  console.log(args);
   event.notify(args);
 };
 
@@ -441,12 +444,15 @@ epiviz.data.WebsocketDataProvider.prototype._removeChart = function (request) {
  */
 epiviz.data.WebsocketDataProvider.prototype._clearDatasourceGroupCache = function (request) {
   var result = new epiviz.events.EventResult();
-
+  console.log("clearDatasource");
+  console.log(request);
+  console.log(result);
   this._fireEvent(this.onRequestClearDatasourceGroupCache(), {
     datasourceGroup: request.get('datasourceGroup'),
     result: result
   });
 
+  console.log(result);
   var response = new epiviz.data.Response(request.id(), result);
   this._sendMessage(JSON.stringify(response.raw()));
 };
@@ -490,6 +496,7 @@ epiviz.data.WebsocketDataProvider.prototype._navigate = function (request) {
  * @private
  */
 epiviz.data.WebsocketDataProvider.prototype._redraw = function (request) {
+  console.log("REDRAW IS BEING CALLED YARRRR!")
   var result = new epiviz.events.EventResult();
   this._fireEvent(this.onRequestRedraw(), {
     result: result
