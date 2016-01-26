@@ -471,7 +471,7 @@ epiviz.data.DataManager.prototype.updateWidth = function(e) {
       self.clearDatasourceGroupCache(response.data());
 
       var result = new epiviz.events.EventResult();
-      self._requestRedraw.notify(result);
+      self._requestRedraw.notify({result: result});
       //console.log(x);
       //console.log(response);
     });

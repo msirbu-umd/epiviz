@@ -646,6 +646,7 @@ epiviz.EpiViz.prototype._registerDataRedraw = function() {
      */
     function(e) {
       console.log("EPIVIZ IS BEING SUMMONED FOR REDRAW!");
+      console.log(e);
       try {
         var currentLocation = self._locationManager.currentLocation();
         self._locationManager.changeCurrentLocation(currentLocation);
