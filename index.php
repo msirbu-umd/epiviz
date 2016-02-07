@@ -370,6 +370,7 @@ if (array_key_exists('debug', $_GET) && $_GET['debug'] == 'true') {
     <script src="src/epiviz/ui/controls/save-svg-as-image-dialog.js"></script>
     <script src="src/epiviz/ui/controls/computed-measurements-dialog.js"></script>
     <script src="src/epiviz/ui/controls/custom-settings-dialog.js"></script>
+    <script src="src/epiviz/ui/controls/update-width-dialog.js"></script>
     <script src="src/epiviz/ui/controls/code-control.js"></script>
     <script src="src/epiviz/ui/controls/edit-code-control.js"></script>
     <script src="src/epiviz/ui/controls/marker-code-control.js"></script>
