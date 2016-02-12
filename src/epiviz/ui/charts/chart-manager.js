@@ -639,13 +639,13 @@ epiviz.ui.charts.ChartManager.prototype._registerChartUpdateWidthEvent = functio
    // console.log(chart);
    // console.log(chart.properties);
    // console.log("--------")
-    console.log(chart);
-    console.log(e);
-    console.log(self._charts);
-    console.log(e.id);
-    console.log(self._charts[e.id]);
-    console.log(self._charts[e.id].measurements());
-    y = self._charts[e.id].measurements();
+   // console.log(chart);
+   // console.log(e);
+   // console.log(self._charts);
+   // console.log(e.id);
+   // console.log(self._charts[e.id]);
+   // console.log(self._charts[e.id].measurements());
+   // y = self._charts[e.id].measurements();
 
     /*y.foreach(function(m){
       console.log(m);
@@ -653,8 +653,8 @@ epiviz.ui.charts.ChartManager.prototype._registerChartUpdateWidthEvent = functio
       e.datasource = m.datasourceGroup();
     });*/
    // console.log(self._charts[e.id].measurements().componentMeasurements());
-    console.log(e);
-    console.log("LOOK ABOVE ARRRGGGHHHH");
+    //console.log(e);
+    //console.log("LOOK ABOVE ARRRGGGHHHH");
     self._chartUpdateWidthEvent.notify(e);
   }));
 };

@@ -114,8 +114,8 @@ epiviz.data.WebsocketDataProvider.prototype._onSocketClose = function () {
  */
 epiviz.data.WebsocketDataProvider.prototype._sendMessage = function (message) {
   if (this.connected() && this._socket.readyState) {
-    console.log("OKAY WE CONNECTED AND FIRING");
-    console.log(message);
+    // console.log("OKAY WE CONNECTED AND FIRING");
+    // console.log(message);
     this._socket.send(message);
   } else {
     this._requestsStack.push(message);
@@ -134,9 +134,15 @@ epiviz.data.WebsocketDataProvider.prototype._onSocketMessage = function (msg) {
    */
   var message = JSON.parse(msg.data);
   if (message['type'] == epiviz.data.MessageType.RESPONSE) {
+    console.log("websocket-data-provider.js");
+    console.log(message);
+
     var response = epiviz.data.Response.fromRawObject(message);
     var callback = this._callbacks[response.id()];
     delete this._callbacks[response.id()];
+
+    console.log(callback);
+    console.log("--------------------");
     callback(response);
   } else if (message['type'] == epiviz.data.MessageType.REQUEST) {
     var Action = epiviz.data.Request.Action;
@@ -202,9 +208,9 @@ epiviz.data.WebsocketDataProvider.prototype._fireEvent = function(event, args) {
     return;
   }
 
-  console.log("._fireEvent");
-  console.log(event);
-  console.log(args);
+  //console.log("._fireEvent");
+  // console.log(event);
+  // console.log(args);
   event.notify(args);
 };
 
@@ -223,6 +229,8 @@ epiviz.data.WebsocketDataProvider.prototype.connected = function () {
 epiviz.data.WebsocketDataProvider.prototype.getData = function (request, callback) {
 
   var message = JSON.stringify(request.raw());
+  console.log("Message inside of Websocket");
+  console.log(message);
   this._callbacks[request.id()] = callback;
   this._sendMessage(message);
 };
@@ -231,7 +239,7 @@ epiviz.data.WebsocketDataProvider.prototype.updateWidth = function (request, cal
 
   var message = JSON.stringify(request.raw());
   this._callbacks[request.id()] = callback;
-  console.log("We in the websocket! updateWidth");
+  //console.log("We in the websocket! updateWidth");
   //console.log(message);
   this._sendMessage(message);
 };
@@ -444,15 +452,15 @@ epiviz.data.WebsocketDataProvider.prototype._removeChart = function (request) {
  */
 epiviz.data.WebsocketDataProvider.prototype._clearDatasourceGroupCache = function (request) {
   var result = new epiviz.events.EventResult();
-  console.log("clearDatasource");
-  console.log(request);
-  console.log(result);
+  //console.log("clearDatasource");
+  //console.log(request);
+  //console.log(result);
   this._fireEvent(this.onRequestClearDatasourceGroupCache(), {
     datasourceGroup: request.get('datasourceGroup'),
     result: result
   });
 
-  console.log(result);
+ // console.log(result);
   var response = new epiviz.data.Response(request.id(), result);
   this._sendMessage(JSON.stringify(response.raw()));
 };
@@ -496,7 +504,7 @@ epiviz.data.WebsocketDataProvider.prototype._navigate = function (request) {
  * @private
  */
 epiviz.data.WebsocketDataProvider.prototype._redraw = function (request) {
-  console.log("REDRAW IS BEING CALLED YARRRR!")
+ // console.log("REDRAW IS BEING CALLED YARRRR!")
   var result = new epiviz.events.EventResult();
   this._fireEvent(this.onRequestRedraw(), {
     result: result

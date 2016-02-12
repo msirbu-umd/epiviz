@@ -488,9 +488,9 @@ epiviz.EpiViz.prototype._registerChartUpdateWidth = function() {
     //console.log("------");
     /** @type {Object.<string, epiviz.measurements.MeasurementSet>} */
     var chartMeasurementsMap = self._chartManager.chartsMeasurements();
-    console.log("EPVIZ.JS")
-    console.log(chartMeasurementsMap);
-    console.log("--------")
+    // console.log("EPVIZ.JS")
+    // console.log(chartMeasurementsMap);
+    // console.log("--------")
     self._dataManager.updateWidth(e);
   }));
 };
@@ -645,8 +645,8 @@ epiviz.EpiViz.prototype._registerDataRedraw = function() {
      * @param {{result: epiviz.events.EventResult}} e
      */
     function(e) {
-      console.log("EPIVIZ IS BEING SUMMONED FOR REDRAW!");
-      console.log(e);
+     // console.log("EPIVIZ IS BEING SUMMONED FOR REDRAW!");
+     // console.log(e);
       try {
         var currentLocation = self._locationManager.currentLocation();
         self._locationManager.changeCurrentLocation(currentLocation);
@@ -764,6 +764,8 @@ epiviz.EpiViz.prototype._registerLocationChanged = function() {
      * @param {{oldValue: epiviz.datatypes.GenomicRange, newValue: epiviz.datatypes.GenomicRange}} e
      */
     function(e) {
+
+      console.log("Inside Epiviz onCurrentLocationChanged");
       self._chartManager.dataWaitStart(undefined,
         /**
          * @param {epiviz.ui.charts.Visualization} chart
@@ -776,8 +778,10 @@ epiviz.EpiViz.prototype._registerLocationChanged = function() {
       /** @type {Object.<string, epiviz.measurements.MeasurementSet>} */
       var chartMeasurementsMap = self._chartManager.chartsMeasurements();
 
+      //console.log(self._dataManager);
       self._dataManager.getData(e.newValue, chartMeasurementsMap,
         function(chartId, data) {
+          //console.log("Inside of epiviz getData");
           self._chartManager.updateCharts(e.newValue, data, [chartId]);
         });
     }));

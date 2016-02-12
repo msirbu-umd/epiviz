@@ -280,6 +280,7 @@ epiviz.data.DataManager.prototype.getMeasurements = function(callback) {
  */
 epiviz.data.DataManager.prototype.getData = function(range, chartMeasurementsMap, dataReadyCallback) {
   if (this._config.useCache) {
+   // console.log("inside datamanager cache");
     this._cache.getData(range, chartMeasurementsMap, dataReadyCallback);
   } else {
     this._getDataNoCache(range, chartMeasurementsMap, dataReadyCallback);
@@ -461,17 +462,24 @@ epiviz.data.DataManager.prototype.updateWidth = function(e) {
 
   this._dataProviderFactory.foreach(function(provider){
     //console.log("THE PROVIDER IS ")
-    console.log(provider);
+    // console.log(provider);
     //console.log(e);
    // provider.getData(x = epiviz.data.Request.updateWidthRequest(e), function(response){
-    provider.updateWidth(x = epiviz.data.Request.updateWidthRequest(e), function(response){
-      console.log("THE RESPONSE IS!");
-      console.log(response);
-      console.log(response.data());
+    provider.updateWidth(epiviz.data.Request.updateWidthRequest(e), function(response){
+     // console.log("THE RESPONSE IS!");
+     // console.log(response);
+     // console.log(response.data());
+
+     // console.log("data-manager.js")
+     // console.log("The response is!");
+     // console.log(response);
+     // console.log("-----------");
+
       self.clearDatasourceGroupCache(response.data());
 
       var result = new epiviz.events.EventResult();
       self._requestRedraw.notify({result: result});
+
       //console.log(x);
       //console.log(response);
     });
@@ -704,6 +712,7 @@ epiviz.data.DataManager.prototype._registerProviderRedraw = function() {
   this._dataProviderFactory.foreach(function(/** @type {epiviz.data.DataProvider} */ provider) {
     provider.onRequestRedraw().addListener(new epiviz.events.EventListener(
       function(e) {
+       // console.log("DRAWING IS IN MY FUTURE!");
         self._requestRedraw.notify(e);
       }));
   });
@@ -717,8 +726,8 @@ epiviz.data.DataManager.prototype._registerProviderClearDatasourceGroupCache = f
   this._dataProviderFactory.foreach(function(/** @type {epiviz.data.DataProvider} */ provider) {
     provider.onRequestClearDatasourceGroupCache().addListener(new epiviz.events.EventListener(
       function(e) {
-        console.log("I HAVE BEEN SUMMONED HERE! AT LAST!");
-        console.log(e);
+       // console.log("I HAVE BEEN SUMMONED HERE! AT LAST!");
+       // console.log(e);
         self.clearDatasourceGroupCache(e.datasourceGroup);
         e.result.success = true;
       }));

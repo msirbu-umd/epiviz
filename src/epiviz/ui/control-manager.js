@@ -836,6 +836,7 @@ epiviz.ui.ControlManager.prototype._registerLocationChanged = function() {
     /**
      * @param {{oldValue: epiviz.datatypes.GenomicRange, newValue: epiviz.datatypes.GenomicRange}} e
      */
+
     function(e) {
       self._updateSelectedLocation(e.newValue);
     }));

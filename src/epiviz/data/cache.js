@@ -64,6 +64,9 @@ epiviz.data.Cache = function(config, dataProviderFactory) {
  * @param {function(string, epiviz.datatypes.GenomicData)} dataReadyCallback
  */
 epiviz.data.Cache.prototype.getData = function(range, chartMeasurementsMap, dataReadyCallback) {
+
+  // console.log("In the cache!");
+
   var MeasurementType = epiviz.measurements.Measurement.Type;
 
   var self = this;
@@ -96,6 +99,8 @@ epiviz.data.Cache.prototype.getData = function(range, chartMeasurementsMap, data
    * @type {epiviz.measurements.MeasurementHashtable.<Array.<epiviz.datatypes.GenomicRange>>}
    */
   var msNeededRanges = this._calcMeasurementNeededRanges(requestRanges, chartMeasurementsMap);
+
+  // console.log(msNeededRanges);
 
   msNeededRanges.foreach(function(m, ranges) {
     var requestStack = self._measurementRequestStackMap.get(m);
@@ -137,6 +142,8 @@ epiviz.data.Cache.prototype.getData = function(range, chartMeasurementsMap, data
 
       var dataProvider = self._dataProviderFactory.get(m.dataprovider()) || self._dataProviderFactory.get(epiviz.data.EmptyResponseDataProvider.DEFAULT_ID);
       dataProvider.getData(request, function(response) {
+     //   console.log("I have returned from the dataProvider!");
+     //   console.log(response);
         requestStack.serveData(response);
       });
     }
@@ -254,15 +261,15 @@ epiviz.data.Cache.prototype._calcMeasurementNeededRanges = function(ranges, char
 
     var chartMeasurements = new epiviz.measurements.MeasurementSet();
 
-    console.log("WHAT ARE YOU DOING!!?!?!!?!");
+    //console.log("WHAT ARE YOU DOING!!?!?!!?!");
     (function(chartMeasurements) {
-      console.log("CMM");
-      console.log(chartMeasurementsMap);
-      console.log("CMMCID")
-      console.log(chartMeasurementsMap[chartId]);
+      //console.log("CMM");
+      //console.log(chartMeasurementsMap);
+      //console.log("CMMCID")
+      //console.log(chartMeasurementsMap[chartId]);
       chartMeasurementsMap[chartId].foreach(function(m) {
-        console.log("Inside!")
-        console.log(m);
+        //console.log("Inside!")
+        //console.log(m);
         var compMs = m.componentMeasurements();
         compMs.foreach(function(compM) {
           chartMeasurements.add(compM);
