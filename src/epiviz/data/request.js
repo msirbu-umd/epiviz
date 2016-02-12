@@ -358,11 +358,15 @@ epiviz.data.Request.updateWidthRequest = function(e){
   console.log(e.args);
   console.log(e.args["min"]);
   console.log(e.args["max"]);*/
+  //console.log("THE REQUEST IS");
+  //console.log(e);
   return epiviz.data.Request.createRequest({
     version: epiviz.EpiViz.VERSION,
     action: epiviz.data.Request.Action.UPDATE_WIDTH,
     chartId: e.id,
+    datasource: e.args["datasource"],
     min: e.args["min"],
-    max: e.args["max"]
+    max: e.args["max"],
+    threshold: e.args["threshold"]
   });
 };
