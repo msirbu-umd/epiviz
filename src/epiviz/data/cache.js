@@ -254,8 +254,15 @@ epiviz.data.Cache.prototype._calcMeasurementNeededRanges = function(ranges, char
 
     var chartMeasurements = new epiviz.measurements.MeasurementSet();
 
+    console.log("WHAT ARE YOU DOING!!?!?!!?!");
     (function(chartMeasurements) {
+      console.log("CMM");
+      console.log(chartMeasurementsMap);
+      console.log("CMMCID")
+      console.log(chartMeasurementsMap[chartId]);
       chartMeasurementsMap[chartId].foreach(function(m) {
+        console.log("Inside!")
+        console.log(m);
         var compMs = m.componentMeasurements();
         compMs.foreach(function(compM) {
           chartMeasurements.add(compM);
