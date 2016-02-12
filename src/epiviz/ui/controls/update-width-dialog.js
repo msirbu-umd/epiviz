@@ -39,27 +39,27 @@ epiviz.ui.controls.UpdateWidthDialog.constructor = epiviz.ui.controls.UpdateWidt
 /**
  */
 epiviz.ui.controls.UpdateWidthDialog.prototype.show = function() {
-    console.log("HEEEE");
-    console.log(this._customSettingsDefs);
-    console.log("BARGH");
-    console.log(this);
-    console.log("BEEE");
-    console.log(this._customSettingsValues);
+    //console.log("HEEEE");
+    //console.log(this._customSettingsDefs);
+    //console.log("BARGH");
+    //console.log(this);
+    //console.log("BEEE");
+    //console.log(this._customSettingsValues);
 
     epiviz.ui.controls.Dialog.prototype.show.call(this);
 
     var SettingType = epiviz.ui.charts.CustomSetting.Type;
 
-    alert("BOBOBOBOBOB");
+    //alert("BOBOBOBOBOB");
     if (!this._dialog) {
         var self = this;
         this._dialog = $('#' + this._id);
         this._dialog.css('display', 'inline');
 
-        alert("YASSS!");
+        //alert("YASSS!");
         var i, inputId, input, value;
         var content = '';
-        alert(this._customSettingsDefs.length);
+        //alert(this._customSettingsDefs.length);
         for (i = 0; i < this._customSettingsDefs.length; ++i) {
 
 
@@ -142,17 +142,17 @@ epiviz.ui.controls.UpdateWidthDialog.prototype.show = function() {
             //width: '600',
             buttons: {
                 Ok: function() {
-                    console.log("MOOOOOOO");
-                    console.log(self);
+                   // console.log("MOOOOOOO");
+                   // console.log(self);
                     for (var i = 0; i < self._customSettingsDefs.length; ++i) {
                         inputId = sprintf('%s-%s', self._id, self._customSettingsDefs[i].id);
                         input = $('#' + inputId);
 
-                        console.log("GO FOR IT!");
-                        console.log(inputId);
-                        console.log(input);
-                        console.log(input.val());
-                        console.log(epiviz.ui.charts.CustomSetting.DEFAULT);
+                      //  console.log("GO FOR IT!");
+                      //  console.log(inputId);
+                      //  console.log(input);
+                      //  console.log(input.val());
+                      //  console.log(epiviz.ui.charts.CustomSetting.DEFAULT);
 
                         var newValue = null;
                         if (input.val() == epiviz.ui.charts.CustomSetting.DEFAULT) {
@@ -170,8 +170,8 @@ epiviz.ui.controls.UpdateWidthDialog.prototype.show = function() {
                                         newValue = (input.val() == epiviz.ui.charts.CustomSetting.DEFAULT) ?
                                             self._customSettingsDefs[i].defaultValue :
                                             parseFloat(input.val());
-                                        console.log("The new value is!");
-                                        console.log(newValue);
+                                     //  console.log("The new value is!");
+                                     //   console.log(newValue);
                                         if (isNaN(newValue)) {
                                             errorDialog = new epiviz.ui.controls.MessageDialog(
                                                 'Invalid property value',

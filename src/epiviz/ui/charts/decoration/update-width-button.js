@@ -40,23 +40,23 @@ epiviz.ui.charts.decoration.UpdateWidthButton.prototype._click = function() {
     };*/
 
     var self = this;
-    console.log("ME SELF");
-    console.log(self);
-    console.log(self._threshold);
+    //console.log("ME SELF");
+    //console.log(self);
+    //console.log(self._threshold);
     return function(){
 
-        console.log("HAAHAHAHAHAHAHA");
-        console.log(self.visualization().properties().customSettingsDefs);
-        console.log("--------------");
-        console.log(self.visualization().customSettingsValues());
-        console.log("2222-------------------2222");
-        console.log(self._threshold);
+       // console.log("HAAHAHAHAHAHAHA");
+       // console.log(self.visualization().properties().customSettingsDefs);
+       // console.log("--------------");
+       // console.log(self.visualization().customSettingsValues());
+       // console.log("2222-------------------2222");
+       // console.log(self._threshold);
 
         var UpdateWidthDialog = new epiviz.ui.controls.UpdateWidthDialog(
             'Threshold Menu!', {
                 ok: function(updateWidthValues) {
-                    alert(updateWidthValues);
-                    alert(updateWidthValues['threshold']);
+                    // alert(updateWidthValues);
+                    // alert(updateWidthValues['threshold']);
                     //TODO: Copy the notify on line 35 here and change min and max to threshold
                     //TODO: Also change epivizr to accept threshold
                     self._threshold = updateWidthValues['threshold'];
