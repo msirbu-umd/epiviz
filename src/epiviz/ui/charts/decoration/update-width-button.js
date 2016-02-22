@@ -52,6 +52,11 @@ epiviz.ui.charts.decoration.UpdateWidthButton.prototype._click = function() {
        // console.log("2222-------------------2222");
        // console.log(self._threshold);
 
+        alert(self.visualization().measurements().first().datasource().id());
+        alert(self.visualization().measurements().first().datasource().threshold());
+        console.log(self.visualization());
+        console.log(self.visualization().measurements());
+
         var UpdateWidthDialog = new epiviz.ui.controls.UpdateWidthDialog(
             'Threshold Menu!', {
                 ok: function(updateWidthValues) {
@@ -59,7 +64,8 @@ epiviz.ui.charts.decoration.UpdateWidthButton.prototype._click = function() {
                     // alert(updateWidthValues['threshold']);
                     //TODO: Copy the notify on line 35 here and change min and max to threshold
                     //TODO: Also change epivizr to accept threshold
-                    self._threshold = updateWidthValues['threshold'];
+                    alert(self.visualization().measurements().first().datasource().threshold());
+                    self.visualization().measurements().first().datasource().setThreshold(updateWidthValues['threshold']);
                     self.visualization().onUpdateWidth().notify(new epiviz.ui.charts.VisEventArgs(self.visualization().id(),
                         {min: 5, max: 20, threshold: updateWidthValues['threshold'], datasource: self.visualization().measurements().first().datasource().id()}));
                     //console.log(CustomSettings);
@@ -71,7 +77,7 @@ epiviz.ui.charts.decoration.UpdateWidthButton.prototype._click = function() {
             },
             //self.visualization().properties().customSettingsDefs,
             [new epiviz.ui.charts.CustomSetting("threshold", "number", 500, "min threshold", null)],
-            {"threshold": self._threshold});
+            {"threshold": self.visualization().measurements().first().datasource().threshold()});
         UpdateWidthDialog.show();
     };
 
