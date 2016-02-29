@@ -111,7 +111,6 @@ epiviz.measurements.Measurement = function(id, name, type, datasourceId, datasou
    */
   this._metadata = metadata || null;
 
-  this._threshold = 100;
 };
 
 /**
@@ -285,17 +284,6 @@ epiviz.measurements.Measurement.prototype.maxValue = function() {
  */
 epiviz.measurements.Measurement.prototype.metadata = function() {
   return this._metadata || [];
-};
-
-/**
- * @returns {?number}
- */
-epiviz.measurements.Measurement.prototype.threshold = function() {
-  return this._threshold;
-};
-
-epiviz.measurements.Measurement.prototype.setThreshold = function(new_threshold) {
-  this._threshold = new_threshold;
 };
 
 /**
