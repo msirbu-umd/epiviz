@@ -12,7 +12,12 @@ goog.provide('epiviz.ui.charts.decoration.VisualizationDecoration');
  * @param {epiviz.Config} [config]
  * @constructor
  */
-epiviz.ui.charts.decoration.VisualizationDecoration = function(visualization, otherDecoration, config) {
+epiviz.ui.charts.decoration.VisualizationDecoration = function(visualization, otherDecoration, config, overrides) {
+
+  console.log("MMMMMMMMMMMMM");
+  console.log(config);
+  console.log(overrides);
+  console.log("MMMMMMMMMMMMM");
   /**
    * @type {epiviz.ui.charts.Visualization}
    * @private
@@ -30,6 +35,13 @@ epiviz.ui.charts.decoration.VisualizationDecoration = function(visualization, ot
    * @private
    */
   this._config = config;
+
+  /**
+   * @type {epiviz.overrides}
+   * @private
+   */
+  this._overrides = overrides;
+
 };
 
 /**
@@ -52,3 +64,8 @@ epiviz.ui.charts.decoration.VisualizationDecoration.prototype.otherDecoration = 
  * @returns {epiviz.Config}
  */
 epiviz.ui.charts.decoration.VisualizationDecoration.prototype.config = function() { return this._config; };
+
+/**
+ * @returns {epiviz.overrides}
+ */
+epiviz.ui.charts.decoration.VisualizationDecoration.prototype.overrides = function() { return this._overrides; };

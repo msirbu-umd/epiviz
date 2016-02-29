@@ -13,8 +13,8 @@ goog.provide('epiviz.ui.charts.decoration.ChartOptionButton');
  * @extends {epiviz.ui.charts.decoration.VisualizationDecoration}
  * @constructor
  */
-epiviz.ui.charts.decoration.ChartOptionButton = function(visualization, otherDecoration, config) {
-  epiviz.ui.charts.decoration.VisualizationDecoration.call(this, visualization, otherDecoration, config);
+epiviz.ui.charts.decoration.ChartOptionButton = function(visualization, otherDecoration, config, overrides) {
+  epiviz.ui.charts.decoration.VisualizationDecoration.call(this, visualization, otherDecoration, config, overrides);
 
   /**
    * @type {boolean}

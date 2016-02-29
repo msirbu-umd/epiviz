@@ -29,7 +29,7 @@ epiviz.main = function() {
   var chartFactory = new epiviz.ui.charts.ChartFactory(config);
 
   /** @type {epiviz.ui.charts.ChartManager} */
-  var chartManager = new epiviz.ui.charts.ChartManager(config);
+  var chartManager = new epiviz.ui.charts.ChartManager(config, measurementsManager.overrides()); // <- measurementManager.overrides()
 
   /** @type {epiviz.ui.ControlManager} */
   var controlManager = new epiviz.ui.ControlManager(config, chartFactory, chartManager, measurementsManager, locationManager);

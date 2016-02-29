@@ -56,7 +56,11 @@ epiviz.measurements.MeasurementsManager = function() {
    * @private
    */
   this._computedMeasurements = new epiviz.measurements.MeasurementSet();
+
+  this._overrides = new epiviz.measurements.MeasurementHashtable();
 };
+
+epiviz.measurements.MeasurementsManager.prototype.overrides = function() { return this._overrides };
 
 /**
  */
