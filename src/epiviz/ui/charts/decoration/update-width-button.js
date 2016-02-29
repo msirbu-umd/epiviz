@@ -15,8 +15,7 @@ epiviz.ui.charts.decoration.UpdateWidthButton = function(visualization, otherDec
     console.log(overrides);
     console.log("!!!!!!!!!!!!!!!!!");
     epiviz.ui.charts.decoration.ChartOptionButton.call(this, visualization, otherDecoration, config, overrides);
-
-    this._threshold = 0;
+    
 };
 
 /*
