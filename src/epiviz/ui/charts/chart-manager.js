@@ -211,7 +211,7 @@ epiviz.ui.charts.ChartManager.prototype.addChart = function(chartType, visConfig
   if (chartType.decorations()) {
     /** @type {epiviz.ui.charts.decoration.VisualizationDecoration} */
     var topDecoration = undefined;
-    console.log(chartType.decorations().length)
+
     for (var i = 0; i < chartType.decorations().length; ++i) {
       /** @type {?(function(new:epiviz.ui.charts.decoration.VisualizationDecoration))} */
       var decorationCtor = epiviz.utils.evaluateFullyQualifiedTypeName(chartType.decorations()[i]);
@@ -221,15 +221,14 @@ epiviz.ui.charts.ChartManager.prototype.addChart = function(chartType, visConfig
       /** @type {epiviz.ui.charts.decoration.VisualizationDecoration} */
       //topDecoration  = epiviz.utils.applyConstructor(decorationCtor, [chart, topDecoration, this._config]);
       /*alert(this._measurementOverrides);*/
-      console.log("****%%%%%%*****");
+     /* console.log("****%%%%%%*****");
       console.log(this._measurementOverrides);
       console.log(this._config);
       console.log(decorationCtor);
-      console.log("****%%%%%%*****");
+      console.log("****%%%%%%*****");*/
 
 
       topDecoration  = epiviz.utils.applyConstructor(decorationCtor, [chart, topDecoration, this._config, this._measurementOverrides]);
-      console.log(topDecoration);
     }
 
     if (topDecoration) {
