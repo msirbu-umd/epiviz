@@ -10,12 +10,7 @@ goog.provide('epiviz.ui.charts.decoration.UpdateWidthButton');
  * @constructor
  */
 epiviz.ui.charts.decoration.UpdateWidthButton = function(visualization, otherDecoration, config, overrides) {
-
-    console.log("Inside updatewidth-button");
-    console.log(overrides);
-    console.log("!!!!!!!!!!!!!!!!!");
     epiviz.ui.charts.decoration.ChartOptionButton.call(this, visualization, otherDecoration, config, overrides);
-    
 };
 
 /*
