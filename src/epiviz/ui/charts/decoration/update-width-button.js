@@ -59,9 +59,9 @@ epiviz.ui.charts.decoration.UpdateWidthButton.prototype._click = function() {
         console.log(self.visualization().measurements()); */
 
         var m = self.visualization().measurements().first();
-       console.log(m);
+        /*console.log(m);
         console.log("*************");
-        alert(self.overrides().contains(m));
+        alert(self.overrides().contains(m));*/
 
         var threshold = {};
         if(self.overrides().contains(m)){
@@ -78,9 +78,9 @@ epiviz.ui.charts.decoration.UpdateWidthButton.prototype._click = function() {
                     // alert(updateWidthValues['threshold']);
                     //TODO: Copy the notify on line 35 here and change min and max to threshold
                     //TODO: Also change epivizr to accept threshold
-                    alert(self.visualization().measurements().first().datasource().threshold());
-                    self.visualization().measurements().first().datasource().setThreshold(updateWidthValues['threshold']);
-                    var m = self.visualization().measurements().first();
+                    //alert(self.visualization().measurements().first().datasource().threshold());
+                    //self.visualization().measurements().first().datasource().setThreshold(updateWidthValues['threshold']);
+                    //var m = self.visualization().measurements().first();
                     if (!self.overrides().contains(m)) {
                        self._overrides.put(m, {});
                      }

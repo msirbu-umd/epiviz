@@ -14,10 +14,11 @@ goog.provide('epiviz.ui.charts.decoration.VisualizationDecoration');
  */
 epiviz.ui.charts.decoration.VisualizationDecoration = function(visualization, otherDecoration, config, overrides) {
 
-  console.log("MMMMMMMMMMMMM");
+  /*console.log("MMMMMMMMMMMMM");
   console.log(config);
   console.log(overrides);
-  console.log("MMMMMMMMMMMMM");
+  console.log("MMMMMMMMMMMMM");*/
+
   /**
    * @type {epiviz.ui.charts.Visualization}
    * @private
