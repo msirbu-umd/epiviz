@@ -59,11 +59,13 @@ epiviz.ui.controls.UpdateWidthDialog.prototype.show = function() {
         //alert("YASSS!");
         var i, inputId, input, value;
         var content = '';
-        //alert(this._customSettingsDefs.length);
+        alert(this._customSettingsDefs.length);
+
         for (i = 0; i < this._customSettingsDefs.length; ++i) {
 
 
             inputId = sprintf('%s-%s', this._id, this._customSettingsDefs[i].id);
+
             var row = sprintf(
                 '<tr><td><label for="%s">%s</label></td><td style="text-align: right;">%%s</td></tr>',
                 inputId, this._customSettingsDefs[i].label);
@@ -89,6 +91,10 @@ epiviz.ui.controls.UpdateWidthDialog.prototype.show = function() {
                 case SettingType.STRING:
                     row = sprintf(row, sprintf(
                         '<input id="%s" value="%s" class="ui-widget-content ui-corner-all" style="text-align: right; padding: 5px;" />', inputId, value));
+                    /* console.log(row);
+                     row = sprintf(row, sprintf('<button type="button" id="thres_but">Set Threshold</button>'));
+                     console.log("row");
+                     console.log(row);*/
                     break;
                 case SettingType.CATEGORICAL:
                 case SettingType.MEASUREMENTS_METADATA:
@@ -108,10 +114,61 @@ epiviz.ui.controls.UpdateWidthDialog.prototype.show = function() {
 
             content += row;
         }
-        content = sprintf('<div style="margin: 5px; padding: 5px; height: auto;"><table style="width: 100%%;">%s</table></div>', content);
+
+       /* content = sprintf('<div style="margin: 5px; padding: 5px; height: auto;"><table style="width: 100%%;">%s</table></div>', content);
+        this._dialog.append(content);
+
+        content = sprintf('<div><button type="button" id="thres_but" style="float: right; margin-right: 10px; margin-botton: 10px">Set Threshold</button></div>', content);
+        this._dialog.append(content);*/
+
+        content = sprintf('<div></div><div><input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold; margin-top: 10px; margin-left: 10px; font-size: 12px"></div>', content);
+        this._dialog.append(content);
+
+        /*  content =  sprintf(' <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold; margin-top: 10px; font-size: 12px">', content);
+         this._dialog.append(content);*/
+
+        content = sprintf('<input type="hidden" id="amount2">', content);
+        this._dialog.append(content);
+
+        $( "#amount2").val("Blah blah blah");
+
+        content = sprintf('<div style="margin: 15px; padding: 5px; height: auto;" id="slider-range-max"></div>', content);
 
         this._dialog.append(content);
 
+
+        /*$('#' + inputId).hover(function(){
+         alert("YEAH");
+         },
+         function(){
+         alert("NO!");
+         });*/
+
+        /*$('#' + inputId).keyup(function(){
+         alert($(this).val());
+         ( "#slider-range-max" ).slider($(this).val());
+         });*/
+
+        $("#thres_but").click(function(){
+            alert("AH YEAH!");
+            alert($('#' +inputId).val());
+            $( "#slider-range-max" ).slider( "value", $('#' +inputId).val());
+            $( "#amount2 ").val($('#' +inputId).val());
+            $( "#amount" ).val("The threshold is " + $('#' +inputId).val() + " kpb.");
+        });
+
+        $( "#slider-range-max" ).slider({
+            range: "max",
+            min: 0,
+            max: 1000,
+            value: self._customSettingsValues["threshold"],
+            slide: function( event, ui ) {
+                $( "#amount" ).val("The threshold is " + ui.value + " kpb.");
+                $( "#amount2 ").val(ui.value);
+                $('#' +inputId).val(ui.value);
+            }
+        });
+        $( "#amount" ).val("The threshold is " + $( "#slider-range-max" ).slider( "value" ) + " kbp." );
 
         // Add jQuery UI properties to fields
         for (i = 0; i < this._customSettingsDefs.length; ++i) {
@@ -135,6 +192,9 @@ epiviz.ui.controls.UpdateWidthDialog.prototype.show = function() {
             }
         }
 
+        /*
+         console.log(self._customSettingsDefs.length);
+         console.log(self._customSettingsDefs);*/
 
         this._dialog.dialog({
             autoOpen: false,
@@ -142,71 +202,78 @@ epiviz.ui.controls.UpdateWidthDialog.prototype.show = function() {
             //width: '600',
             buttons: {
                 Ok: function() {
-                   // console.log("MOOOOOOO");
-                   // console.log(self);
-                    for (var i = 0; i < self._customSettingsDefs.length; ++i) {
-                        inputId = sprintf('%s-%s', self._id, self._customSettingsDefs[i].id);
-                        input = $('#' + inputId);
 
-                      //  console.log("GO FOR IT!");
-                      //  console.log(inputId);
-                      //  console.log(input);
-                      //  console.log(input.val());
-                      //  console.log(epiviz.ui.charts.CustomSetting.DEFAULT);
+                    var threshold = parseFloat($("#amount2").val());
 
-                        var newValue = null;
-                        if (input.val() == epiviz.ui.charts.CustomSetting.DEFAULT) {
-                            newValue = self._customSettingsDefs[i].defaultValue;
-                        } else {
-                            var errorDialog = null;
-                            try {
-                                switch (self._customSettingsDefs[i].type) {
-                                    case SettingType.BOOLEAN:
-                                        var checked = $('#' + inputId + ' :radio:checked').attr('id');
-                                        newValue = checked.substr(checked.lastIndexOf('-')+1) == 'true';
-                                        break;
+                    // console.log("MOOOOOOO");
+                    // console.log(self);
 
-                                    case SettingType.NUMBER:
-                                        newValue = (input.val() == epiviz.ui.charts.CustomSetting.DEFAULT) ?
-                                            self._customSettingsDefs[i].defaultValue :
-                                            parseFloat(input.val());
-                                     //  console.log("The new value is!");
-                                     //   console.log(newValue);
-                                        if (isNaN(newValue)) {
-                                            errorDialog = new epiviz.ui.controls.MessageDialog(
-                                                'Invalid property value',
-                                                { Ok: function() {} },
-                                                sprintf('Invalid value for setting "%s" (%s)', self._customSettingsDefs[i].label, self._customSettingsDefs[i].id),
-                                                epiviz.ui.controls.MessageDialog.Icon.ERROR);
-                                            errorDialog.show();
-                                            return;
-                                        }
-                                        break;
-                                    case SettingType.ARRAY:
-                                        newValue = input.val().split(/[\s,]+/g);
-                                        break;
-                                    case SettingType.STRING:
-                                    case SettingType.CATEGORICAL:
-                                    case SettingType.MEASUREMENTS_METADATA:
-                                    case SettingType.MEASUREMENTS_ANNOTATION:
-                                        newValue = input.val();
-                                        break;
-                                }
-                            } catch (error) {
-                                errorDialog = new epiviz.ui.controls.MessageDialog(
-                                    'Invalid property value',
-                                    { Ok: function() {} },
-                                    sprintf('Invalid value for setting "%s" (%s)', self._customSettingsDefs[i].label, self._customSettingsDefs[i].id),
-                                    epiviz.ui.controls.MessageDialog.Icon.ERROR);
-                                errorDialog.show();
-                                return;
-                            }
-                        }
+                    /*
+                     for (var i = 0; i < self._customSettingsDefs.length; ++i) {
+                     inputId = sprintf('%s-%s', self._id, self._customSettingsDefs[i].id);
+                     input = $('#' + inputId);
 
-                        self._customSettingsValues[self._customSettingsDefs[i].id] = newValue;
-                    }
+                     //  console.log("GO FOR IT!");
+                     //  console.log(inputId);
+                     //  console.log(input);
+                     //  console.log(input.val());
+                     //  console.log(epiviz.ui.charts.CustomSetting.DEFAULT);
 
-                    self._handlers.ok(self._customSettingsValues);
+                     var newValue = null;
+                     if (input.val() == epiviz.ui.charts.CustomSetting.DEFAULT) {
+                     newValue = self._customSettingsDefs[i].defaultValue;
+                     } else {
+                     var errorDialog = null;
+                     try {
+                     switch (self._customSettingsDefs[i].type) {
+                     case SettingType.BOOLEAN:
+                     var checked = $('#' + inputId + ' :radio:checked').attr('id');
+                     newValue = checked.substr(checked.lastIndexOf('-')+1) == 'true';
+                     break;
+
+                     case SettingType.NUMBER:
+                     newValue = (input.val() == epiviz.ui.charts.CustomSetting.DEFAULT) ?
+                     self._customSettingsDefs[i].defaultValue :
+                     parseFloat(input.val());
+                     //  console.log("The new value is!");
+                     //   console.log(newValue);
+                     console.log("I'm in das number!");
+                     console.log($("#amount").val());
+                     if (isNaN(newValue)) {
+                     errorDialog = new epiviz.ui.controls.MessageDialog(
+                     'Invalid property value',
+                     { Ok: function() {} },
+                     sprintf('Invalid value for setting "%s" (%s)', self._customSettingsDefs[i].label, self._customSettingsDefs[i].id),
+                     epiviz.ui.controls.MessageDialog.Icon.ERROR);
+                     errorDialog.show();
+                     return;
+                     }
+                     break;
+                     case SettingType.ARRAY:
+                     newValue = input.val().split(/[\s,]+/g);
+                     break;
+                     case SettingType.STRING:
+                     case SettingType.CATEGORICAL:
+                     case SettingType.MEASUREMENTS_METADATA:
+                     case SettingType.MEASUREMENTS_ANNOTATION:
+                     newValue = input.val();
+                     break;
+                     }
+                     } catch (error) {
+                     errorDialog = new epiviz.ui.controls.MessageDialog(
+                     'Invalid property value',
+                     { Ok: function() {} },
+                     sprintf('Invalid value for setting "%s" (%s)', self._customSettingsDefs[i].label, self._customSettingsDefs[i].id),
+                     epiviz.ui.controls.MessageDialog.Icon.ERROR);
+                     errorDialog.show();
+                     return;
+                     }
+                     }
+
+                     self._customSettingsValues[self._customSettingsDefs[i].id] = newValue;
+                     }*/
+
+                    self._handlers.ok(threshold);
                     $(this).dialog('close');
                 },
                 Cancel: function() {

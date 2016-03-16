@@ -69,6 +69,7 @@ epiviz.ui.charts.decoration.UpdateWidthButton.prototype._click = function() {
         var threshold = {};
         allM.foreach(function(m){
             console.log(m.datasource().id());
+            console.log(m.datasource().name());
             if(self.overrides().contains(m)){
                 var overrides = self._overrides.get(m);
 
