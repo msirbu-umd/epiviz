@@ -59,17 +59,54 @@ epiviz.ui.charts.decoration.UpdateWidthButton.prototype._click = function() {
         console.log(self.visualization().measurements()); */
 
         var m = self.visualization().measurements().first();
+
+        console.log(m);
+        console.log("update-width-button-measurements-time!");
+        console.log(self.visualization().measurements());
+
+        allM = self.visualization().measurements();
+
+        var threshold = {};
+        allM.foreach(function(m){
+            console.log(m.datasource().id());
+            if(self.overrides().contains(m)){
+                var overrides = self._overrides.get(m);
+
+                if(Object.keys(threshold).length != 0) {
+                    if(threshold["threshold"] > overrides["threshold"]) {
+                        threshold["threshold"] = overrides["threshold"];
+                    }
+                }else{
+                    threshold["threshold"] = overrides["threshold"];
+                }
+            }else{
+                threshold["threshold"] = 0;
+            }
+        });
+
+        console.log("the threshold is:");
+        console.log(threshold);
+        console.log("-----------------------------------");
+
+        /*
+        y.foreach(function(m){
+            console.log(m);
+            console.log(m.datasourceGroup());
+            e.datasource = m.datasourceGroup();
+        });*/
+
         /*console.log(m);
         console.log("*************");
         alert(self.overrides().contains(m));*/
 
+/*
         var threshold = {};
         if(self.overrides().contains(m)){
             var overrides = self._overrides.get(m);
             threshold["threshold"] = overrides["threshold"];
         }else{
             threshold["threshold"] = 0;
-        }
+        }*/
 
         var UpdateWidthDialog = new epiviz.ui.controls.UpdateWidthDialog(
             'Threshold Menu!', {
@@ -81,15 +118,28 @@ epiviz.ui.charts.decoration.UpdateWidthButton.prototype._click = function() {
                     //alert(self.visualization().measurements().first().datasource().threshold());
                     //self.visualization().measurements().first().datasource().setThreshold(updateWidthValues['threshold']);
                     //var m = self.visualization().measurements().first();
+
+                    allM.foreach(function(m){
+                        console.log("I'm in the loop!");
+                        console.log(m);
+                        if (!self.overrides().contains(m)) {
+                            self._overrides.put(m, {});
+                        }
+                        var overrides = self._overrides.get(m);
+                        overrides['threshold'] = updateWidthValues['threshold'];
+
+                        self.visualization().onUpdateWidth().notify(new epiviz.ui.charts.VisEventArgs(self.visualization().id(),
+                            {min: 5, max: 20, threshold: updateWidthValues['threshold'], datasource: m.datasource().id()}));
+                    });
+
+                    /*
                     if (!self.overrides().contains(m)) {
                        self._overrides.put(m, {});
                      }
                     var overrides = self._overrides.get(m);
                     overrides['threshold'] = updateWidthValues['threshold'];
+                    */
 
-
-                    self.visualization().onUpdateWidth().notify(new epiviz.ui.charts.VisEventArgs(self.visualization().id(),
-                        {min: 5, max: 20, threshold: updateWidthValues['threshold'], datasource: self.visualization().measurements().first().datasource().id()}));
                     //console.log(CustomSettings);
                     //console.log(self.visualization().properties().customSettingsDefs)
                     //console.log(self.visualization().customSettingsValues());
