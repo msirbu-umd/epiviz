@@ -68,20 +68,22 @@ epiviz.ui.charts.decoration.UpdateWidthButton.prototype._click = function() {
 
         var threshold = {};
         allM.foreach(function(m){
-            console.log(m.datasource().id());
-            console.log(m.datasource().name());
+            //console.log(m.datasource().id());
+            //console.log(m.datasource().name());
+            threshold[m.datasource().name()] = {};
             if(self.overrides().contains(m)){
                 var overrides = self._overrides.get(m);
 
-                if(Object.keys(threshold).length != 0) {
+                threshold[m.datasource().name()]["threshold"] = overrides["threshold"];
+                /*if(Object.keys(threshold).length != 0) {
                     if(threshold["threshold"] > overrides["threshold"]) {
                         threshold["threshold"] = overrides["threshold"];
                     }
                 }else{
                     threshold["threshold"] = overrides["threshold"];
-                }
+                }*/
             }else{
-                threshold["threshold"] = 0;
+                threshold[m.datasource().name()]["threshold"] = 0;
             }
         });
 
@@ -120,6 +122,8 @@ epiviz.ui.charts.decoration.UpdateWidthButton.prototype._click = function() {
                     //self.visualization().measurements().first().datasource().setThreshold(updateWidthValues['threshold']);
                     //var m = self.visualization().measurements().first();
 
+                    console.log("LETS GET THIS GOING!");
+                    console.log(updateWidthValues);
                     allM.foreach(function(m){
                         console.log("I'm in the loop!");
                         console.log(m);
@@ -127,10 +131,11 @@ epiviz.ui.charts.decoration.UpdateWidthButton.prototype._click = function() {
                             self._overrides.put(m, {});
                         }
                         var overrides = self._overrides.get(m);
-                        overrides['threshold'] = updateWidthValues['threshold'];
+                        console.log(updateWidthValues[m.datasource().name()]);
+                        overrides['threshold'] = updateWidthValues[m.datasource().name()]; //updateWidthValues['threshold'];
 
                         self.visualization().onUpdateWidth().notify(new epiviz.ui.charts.VisEventArgs(self.visualization().id(),
-                            {min: 5, max: 20, threshold: updateWidthValues['threshold'], datasource: m.datasource().id()}));
+                            {min: 5, max: 20, threshold: updateWidthValues[m.datasource().name()] * 1000/*updateWidthValues['threshold']*/, datasource: m.datasource().id()}));
                     });
 
                     /*
