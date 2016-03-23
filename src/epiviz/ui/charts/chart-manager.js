@@ -209,6 +209,9 @@ epiviz.ui.charts.ChartManager.prototype.addChart = function(chartType, visConfig
   this._registerChartUpdateWidthEvent(chart);
 
   if (chartType.decorations()) {
+    console.log("AAAACCCCCCKKKKKKKKK");
+    console.log(chartType);
+    console.log(chartType.decorations());
     /** @type {epiviz.ui.charts.decoration.VisualizationDecoration} */
     var topDecoration = undefined;
 
@@ -217,6 +220,12 @@ epiviz.ui.charts.ChartManager.prototype.addChart = function(chartType, visConfig
       var decorationCtor = epiviz.utils.evaluateFullyQualifiedTypeName(chartType.decorations()[i]);
 
       if (!decorationCtor) { continue; }
+
+      if(chartType.decorations()[i] == "epiviz.ui.charts.decoration.UpdateWidthButton" &&
+      !(chartType instanceof epiviz.plugins.charts.BlocksTrackType)){ continue; }
+
+      if(chartType.decorations()[i] == "epiviz.ui.charts.decoration.UpdateWidthButton" &&
+      !(visConfigSelection.measurements.first().name() == "blocks")){ continue; }
 
       /** @type {epiviz.ui.charts.decoration.VisualizationDecoration} */
       //topDecoration  = epiviz.utils.applyConstructor(decorationCtor, [chart, topDecoration, this._config]);

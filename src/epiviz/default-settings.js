@@ -59,7 +59,6 @@ epiviz.Config.SETTINGS = {
         'epiviz.ui.charts.decoration.SaveChartButton',
         'epiviz.ui.charts.decoration.CustomSettingsButton',
         'epiviz.ui.charts.decoration.EditCodeButton',
-        'epiviz.ui.charts.decoration.UpdateWidthButton',
 
         'epiviz.ui.charts.decoration.ChartColorsButton',
         'epiviz.ui.charts.decoration.ChartLoaderAnimation',
@@ -79,11 +78,13 @@ epiviz.Config.SETTINGS = {
       ]
     },
 
+
     track: {
       width: '100%',
       height: 90,
       margins: new epiviz.ui.charts.Margins(25, 20, 23, 10),
       decorations: [
+        'epiviz.ui.charts.decoration.UpdateWidthButton',
         'epiviz.ui.charts.decoration.ToggleTooltipButton',
 
         'epiviz.ui.charts.decoration.ChartTooltip',
@@ -101,6 +102,14 @@ epiviz.Config.SETTINGS = {
         'epiviz.ui.charts.decoration.HierarchyFilterCodeButton'
       ]
     },
+
+    /*
+    'epiviz.plugins.charts.BlocksTrackType': {
+      height: 800
+      /*decorations: [
+        'epiviz.ui.charts.decoration.UpdateWidthButton'
+      ]
+    },*/
 
     'epiviz.plugins.charts.GenesTrack': {
       height: 120,

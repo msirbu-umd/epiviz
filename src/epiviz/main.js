@@ -17,6 +17,9 @@ goog.require('epiviz.EpiViz');
  * Main entry point
  */
 epiviz.main = function() {
+
+  console.log("I'm in main.js");
+
   var config = new epiviz.Config(epiviz.Config.SETTINGS);
 
   /** @type {epiviz.ui.LocationManager} */

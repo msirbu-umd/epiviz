@@ -180,6 +180,9 @@ epiviz.EpiViz.prototype.config = function() {
  * @private
  */
 epiviz.EpiViz.prototype._addChart = function(type, visConfigSelection, chartId, chartProperties) {
+
+  console.log("I'm here in addChart!");
+
   chartId = this._chartManager.addChart(type, visConfigSelection, chartId, chartProperties);
   var self = this;
   // TODO: Maybe later implement hierarchical display type (see display-type.js for the start of the idea)
