@@ -225,7 +225,7 @@ epiviz.ui.charts.ChartManager.prototype.addChart = function(chartType, visConfig
       !(chartType instanceof epiviz.plugins.charts.BlocksTrackType)){ continue; }
 
       if(chartType.decorations()[i] == "epiviz.ui.charts.decoration.UpdateWidthButton" &&
-      !(visConfigSelection.measurements.first().name() == "blocks")){ continue; }
+      !(visConfigSelection.measurements.first().epivizrBound())){ continue; }
 
       /** @type {epiviz.ui.charts.decoration.VisualizationDecoration} */
       //topDecoration  = epiviz.utils.applyConstructor(decorationCtor, [chart, topDecoration, this._config]);

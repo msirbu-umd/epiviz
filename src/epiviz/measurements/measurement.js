@@ -20,11 +20,12 @@ goog.provide('epiviz.measurements.Measurement.Type');
  * @param {number} [minValue]
  * @param {number} [maxValue]
  * @param {Array.<string>} [metadata]
+ * @param {boolean} [epivizrBound]
  * @constructor
  */
 epiviz.measurements.Measurement = function(id, name, type, datasourceId, datasourceGroup,
                                            dataprovider, formula, defaultChartType, annotation,
-                                           minValue, maxValue, metadata) {
+                                           minValue, maxValue, metadata, epivizrBound) {
 
   var MeasurementType = epiviz.measurements.Measurement.Type;
 
@@ -61,7 +62,8 @@ epiviz.measurements.Measurement = function(id, name, type, datasourceId, datasou
       null, // formula
       'Blocks Track', // defaultChartType
       null, null, null, // annotation, minValue, maxValue
-      metadata); // metadata
+      metadata,  // metadata
+      epivizrBound);
 
   /**
    * @type {string}
@@ -110,6 +112,13 @@ epiviz.measurements.Measurement = function(id, name, type, datasourceId, datasou
    * @private
    */
   this._metadata = metadata || null;
+
+  /**
+   *
+   * @type {boolean}
+   * @private
+   */
+  this._epivizrBound = epivizrBound || false;
 
 };
 
@@ -284,6 +293,13 @@ epiviz.measurements.Measurement.prototype.maxValue = function() {
  */
 epiviz.measurements.Measurement.prototype.metadata = function() {
   return this._metadata || [];
+};
+
+/**
+ * @returns {boolean}
+ */
+epiviz.measurements.Measurement.prototype.epivizrBound = function() {
+  return this._epivizrBound || false;
 };
 
 /**

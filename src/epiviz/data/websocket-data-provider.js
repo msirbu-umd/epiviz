@@ -254,6 +254,7 @@ epiviz.data.WebsocketDataProvider.prototype._addMeasurements = function (request
   var result = new epiviz.events.EventResult();
   var measurements = new epiviz.measurements.MeasurementSet();
 
+  console.log("websocket-data-provder.js: add_measurements");
   /**
    * @type {Array.<{
    *   id: string,
@@ -281,7 +282,8 @@ epiviz.data.WebsocketDataProvider.prototype._addMeasurements = function (request
       rawMeasurements[i]['annotation'],
       rawMeasurements[i]['minValue'],
       rawMeasurements[i]['maxValue'],
-      rawMeasurements[i]['metadata']
+      rawMeasurements[i]['metadata'],
+        rawMeasurements[i]['epivizrBound']
     ));
   }
 
@@ -326,7 +328,8 @@ epiviz.data.WebsocketDataProvider.prototype._removeMeasurements = function (requ
       rawMeasurements[i]['annotation'],
       rawMeasurements[i]['minValue'],
       rawMeasurements[i]['maxValue'],
-      rawMeasurements[i]['metadata']
+      rawMeasurements[i]['metadata'],
+        rawMeasurements[i]['epivizrBound']
     ));
   }
   this._fireEvent(this.onRequestRemoveMeasurements(), {measurements: measurements, result: result});
@@ -384,6 +387,7 @@ epiviz.data.WebsocketDataProvider.prototype._addChart = function (request) {
   if (request.get('measurements') != undefined) {
     measurements = new epiviz.measurements.MeasurementSet();
 
+    console.log("websocket-data-provder.js: add_Chart");
     /**
      * @type {Array.<{
      *   id: string,
@@ -411,7 +415,8 @@ epiviz.data.WebsocketDataProvider.prototype._addChart = function (request) {
         rawMeasurements[i]['annotation'],
         rawMeasurements[i]['minValue'],
         rawMeasurements[i]['maxValue'],
-        rawMeasurements[i]['metadata']
+        rawMeasurements[i]['metadata'],
+          rawMeasurements[i]['epivizrBound']
       ));
     }
   }
