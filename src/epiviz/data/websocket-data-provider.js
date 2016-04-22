@@ -269,6 +269,7 @@ epiviz.data.WebsocketDataProvider.prototype._addMeasurements = function (request
    *   metadata: ?Array.<string>}>}
    */
   var rawMeasurements = JSON.parse(request.get('measurements'));
+  //console.log(rawMeasurements);
   for (var i = 0; i < rawMeasurements.length; ++i) {
     measurements.add(new epiviz.measurements.Measurement(
       rawMeasurements[i]['id'],
@@ -283,7 +284,7 @@ epiviz.data.WebsocketDataProvider.prototype._addMeasurements = function (request
       rawMeasurements[i]['minValue'],
       rawMeasurements[i]['maxValue'],
       rawMeasurements[i]['metadata'],
-        rawMeasurements[i]['epivizrBound']
+        rawMeasurements[i]['canFilter']
     ));
   }
 
@@ -329,7 +330,7 @@ epiviz.data.WebsocketDataProvider.prototype._removeMeasurements = function (requ
       rawMeasurements[i]['minValue'],
       rawMeasurements[i]['maxValue'],
       rawMeasurements[i]['metadata'],
-        rawMeasurements[i]['epivizrBound']
+        rawMeasurements[i]['canFilter']
     ));
   }
   this._fireEvent(this.onRequestRemoveMeasurements(), {measurements: measurements, result: result});
@@ -416,7 +417,7 @@ epiviz.data.WebsocketDataProvider.prototype._addChart = function (request) {
         rawMeasurements[i]['minValue'],
         rawMeasurements[i]['maxValue'],
         rawMeasurements[i]['metadata'],
-          rawMeasurements[i]['epivizrBound']
+          rawMeasurements[i]['canFilter']
       ));
     }
   }

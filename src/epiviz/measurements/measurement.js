@@ -20,12 +20,12 @@ goog.provide('epiviz.measurements.Measurement.Type');
  * @param {number} [minValue]
  * @param {number} [maxValue]
  * @param {Array.<string>} [metadata]
- * @param {boolean} [epivizrBound]
+ * @param {boolean} [canFilter]
  * @constructor
  */
 epiviz.measurements.Measurement = function(id, name, type, datasourceId, datasourceGroup,
                                            dataprovider, formula, defaultChartType, annotation,
-                                           minValue, maxValue, metadata, epivizrBound) {
+                                           minValue, maxValue, metadata, canFilter) {
 
   var MeasurementType = epiviz.measurements.Measurement.Type;
 
@@ -63,7 +63,7 @@ epiviz.measurements.Measurement = function(id, name, type, datasourceId, datasou
       'Blocks Track', // defaultChartType
       null, null, null, // annotation, minValue, maxValue
       metadata,  // metadata
-      epivizrBound);
+      canFilter);
 
   /**
    * @type {string}
@@ -118,7 +118,7 @@ epiviz.measurements.Measurement = function(id, name, type, datasourceId, datasou
    * @type {boolean}
    * @private
    */
-  this._epivizrBound = epivizrBound || false;
+  this._canFilter =  canFilter || false;
 
 };
 
@@ -298,8 +298,10 @@ epiviz.measurements.Measurement.prototype.metadata = function() {
 /**
  * @returns {boolean}
  */
-epiviz.measurements.Measurement.prototype.epivizrBound = function() {
-  return this._epivizrBound || false;
+epiviz.measurements.Measurement.prototype.canFilter = function() {
+  //console.log("HERE!");
+  //console.log(this._canFilter);
+  return this._canFilter || false;
 };
 
 /**

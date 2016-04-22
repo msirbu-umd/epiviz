@@ -221,11 +221,30 @@ epiviz.ui.charts.ChartManager.prototype.addChart = function(chartType, visConfig
 
       if (!decorationCtor) { continue; }
 
+      if(chartType.decorations()[i] == "epiviz.ui.charts.decoration.UpdateWidthButton"){
+
+        if(!(chartType instanceof epiviz.plugins.charts.BlocksTrackType)){ continue; }
+
+        allM = visConfigSelection.measurements;
+
+        canFilter = true;
+
+        allM.foreach(function(m){
+          if(!m.canFilter()){
+            canFilter = false;
+          }
+        });
+
+        if(! canFilter) {continue; }
+      }
+      /*
       if(chartType.decorations()[i] == "epiviz.ui.charts.decoration.UpdateWidthButton" &&
       !(chartType instanceof epiviz.plugins.charts.BlocksTrackType)){ continue; }
 
+
+      allM = visConfigSelection.visualization().measurements();
       if(chartType.decorations()[i] == "epiviz.ui.charts.decoration.UpdateWidthButton" &&
-      !(visConfigSelection.measurements.first().epivizrBound())){ continue; }
+      !(visConfigSelection.measurements.first().epivizrBound())){ continue; }*/
 
       /** @type {epiviz.ui.charts.decoration.VisualizationDecoration} */
       //topDecoration  = epiviz.utils.applyConstructor(decorationCtor, [chart, topDecoration, this._config]);
