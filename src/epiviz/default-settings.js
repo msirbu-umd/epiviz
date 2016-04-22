@@ -84,7 +84,7 @@ epiviz.Config.SETTINGS = {
       height: 90,
       margins: new epiviz.ui.charts.Margins(25, 20, 23, 10),
       decorations: [
-        'epiviz.ui.charts.decoration.UpdateWidthButton',
+        //'epiviz.ui.charts.decoration.UpdateWidthButton',
         'epiviz.ui.charts.decoration.ToggleTooltipButton',
 
         'epiviz.ui.charts.decoration.ChartTooltip',
@@ -103,13 +103,12 @@ epiviz.Config.SETTINGS = {
       ]
     },
 
-    /*
-    'epiviz.plugins.charts.BlocksTrackType': {
-      height: 800
-      /*decorations: [
+
+    'epiviz.plugins.charts.BlocksTrack': {
+      decorations: [
         'epiviz.ui.charts.decoration.UpdateWidthButton'
       ]
-    },*/
+    },
 
     'epiviz.plugins.charts.GenesTrack': {
       height: 120,
