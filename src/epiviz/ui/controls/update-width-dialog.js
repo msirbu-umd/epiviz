@@ -43,13 +43,14 @@ epiviz.ui.controls.UpdateWidthDialog.prototype.show = function() {
 
     var SettingType = epiviz.ui.charts.CustomSetting.Type;
 
-    //alert("BOBOBOBOBOB");
+    console.log("---------");
+    console.log("Inside update-width-dialog");
+
     if (!this._dialog) {
         var self = this;
         this._dialog = $('#' + this._id);
         this._dialog.css('display', 'inline');
 
-        //alert("YASSS!");
         var i, inputId, input, value, initialThreshold, inputSlider, newThresholdId;
         var content = '';
         console.log(this._customSettingsValues);

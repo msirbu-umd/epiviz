@@ -10,6 +10,7 @@ goog.provide('epiviz.ui.charts.decoration.UpdateWidthButton');
  * @constructor
  */
 epiviz.ui.charts.decoration.UpdateWidthButton = function(visualization, otherDecoration, config, overrides) {
+    console.log("+++++++++ updateWidth Button ++++++++++++");
     epiviz.ui.charts.decoration.ChartOptionButton.call(this, visualization, otherDecoration, config, overrides);
 };
 
@@ -66,6 +67,8 @@ epiviz.ui.charts.decoration.UpdateWidthButton.prototype._click = function() {
 
         allM = self.visualization().measurements();
 
+        console.log("THE OVERRIDES IS:");
+        console.log(self.overrides());
         var threshold = {};
         allM.foreach(function(m){
             //console.log(m.datasource().id());
@@ -124,6 +127,7 @@ epiviz.ui.charts.decoration.UpdateWidthButton.prototype._click = function() {
 
                     console.log("LETS GET THIS GOING!");
                     console.log(updateWidthValues);
+
                     allM.foreach(function(m){
                         console.log("I'm in the loop!");
                         console.log(m);

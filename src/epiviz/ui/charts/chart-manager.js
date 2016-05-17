@@ -12,6 +12,7 @@ goog.provide('epiviz.ui.charts.ChartManager');
  */
 epiviz.ui.charts.ChartManager = function(config, overrides) {
 
+  console.log("+++++++++ Chart Manager ++++++++++++");
   /**
    * @type {epiviz.Config}
    * @private

@@ -14,6 +14,7 @@ goog.provide('epiviz.ui.charts.decoration.ChartOptionButton');
  * @constructor
  */
 epiviz.ui.charts.decoration.ChartOptionButton = function(visualization, otherDecoration, config, overrides) {
+  console.log("+++++++++ ChartOption Button ++++++++++++");
   epiviz.ui.charts.decoration.VisualizationDecoration.call(this, visualization, otherDecoration, config, overrides);
 
   /**

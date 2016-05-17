@@ -486,14 +486,15 @@ epiviz.EpiViz.prototype._registerChartPropagateHierarchySelection = function() {
 epiviz.EpiViz.prototype._registerChartUpdateWidth = function() {
   var self = this;
   this._chartManager.onChartUpdateWidthEvent().addListener(new epiviz.events.EventListener(function(e){
-    //console.log("Epiviz.js inside")
-    //console.log(e);
+    console.log("Epiviz.js inside")
+    console.log(e);
     //console.log("------");
     /** @type {Object.<string, epiviz.measurements.MeasurementSet>} */
     var chartMeasurementsMap = self._chartManager.chartsMeasurements();
     // console.log("EPVIZ.JS")
-    // console.log(chartMeasurementsMap);
+    console.log(chartMeasurementsMap);
     // console.log("--------")
+
     self._dataManager.updateWidth(e);
   }));
 };
@@ -648,7 +649,7 @@ epiviz.EpiViz.prototype._registerDataRedraw = function() {
      * @param {{result: epiviz.events.EventResult}} e
      */
     function(e) {
-     // console.log("EPIVIZ IS BEING SUMMONED FOR REDRAW!");
+     console.log("EPIVIZ IS BEING SUMMONED FOR REDRAW!");
      // console.log(e);
       try {
         var currentLocation = self._locationManager.currentLocation();

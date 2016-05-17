@@ -134,15 +134,15 @@ epiviz.data.WebsocketDataProvider.prototype._onSocketMessage = function (msg) {
    */
   var message = JSON.parse(msg.data);
   if (message['type'] == epiviz.data.MessageType.RESPONSE) {
-    console.log("websocket-data-provider.js");
-    console.log(message);
+    //console.log("websocket-data-provider.js");
+    //console.log(message);
 
     var response = epiviz.data.Response.fromRawObject(message);
     var callback = this._callbacks[response.id()];
     delete this._callbacks[response.id()];
 
-    console.log(callback);
-    console.log("--------------------");
+    //console.log(callback);
+    //console.log("--------------------");
     callback(response);
   } else if (message['type'] == epiviz.data.MessageType.REQUEST) {
     var Action = epiviz.data.Request.Action;

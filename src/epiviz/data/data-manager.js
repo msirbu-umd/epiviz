@@ -245,6 +245,8 @@ epiviz.data.DataManager.prototype.getMeasurements = function(callback) {
        */
       function(response) {
         var jsondata = response.data();
+        console.log("WAT MEASURMENETS WE GETTING!");
+        console.log(jsondata);
 
         if (jsondata) {
           var n = jsondata['id'] ? (jsondata['id'].length || 0) : 0;
@@ -712,7 +714,8 @@ epiviz.data.DataManager.prototype._registerProviderRedraw = function() {
   this._dataProviderFactory.foreach(function(/** @type {epiviz.data.DataProvider} */ provider) {
     provider.onRequestRedraw().addListener(new epiviz.events.EventListener(
       function(e) {
-       // console.log("DRAWING IS IN MY FUTURE!");
+        console.log("REgisterProviderRedraw: DRAWING IS IN MY FUTURE!");
+        console.log(e);
         self._requestRedraw.notify(e);
       }));
   });
@@ -726,10 +729,10 @@ epiviz.data.DataManager.prototype._registerProviderClearDatasourceGroupCache = f
   this._dataProviderFactory.foreach(function(/** @type {epiviz.data.DataProvider} */ provider) {
     provider.onRequestClearDatasourceGroupCache().addListener(new epiviz.events.EventListener(
       function(e) {
-       // console.log("I HAVE BEEN SUMMONED HERE! AT LAST!");
+       console.log("registerPRoviderClearDataSourceGroupCache: I HAVE BEEN SUMMONED HERE! AT LAST!");
        // console.log(e);
         self.clearDatasourceGroupCache(e.datasourceGroup);
-        e.result.success = true;
+        e.result.success =true;
       }));
   });
 };
