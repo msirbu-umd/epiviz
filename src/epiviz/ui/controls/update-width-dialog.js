@@ -43,9 +43,6 @@ epiviz.ui.controls.UpdateWidthDialog.prototype.show = function() {
 
     var SettingType = epiviz.ui.charts.CustomSetting.Type;
 
-    console.log("---------");
-    console.log("Inside update-width-dialog");
-
     if (!this._dialog) {
         var self = this;
         this._dialog = $('#' + this._id);
@@ -53,8 +50,6 @@ epiviz.ui.controls.UpdateWidthDialog.prototype.show = function() {
 
         var i, inputId, input, value, initialThreshold, inputSlider, newThresholdId;
         var content = '';
-        console.log(this._customSettingsValues);
-        console.log(this._customSettingsDefs);
 
         var labels = [];
         var thresholds = [];
@@ -105,8 +100,6 @@ epiviz.ui.controls.UpdateWidthDialog.prototype.show = function() {
         }
 
         $("#thres_but").click(function(){
-            alert("AH YEAH!");
-            alert($('#' +inputId).val());
             $( "#slider-range-max" ).slider( "value", $('#' +inputId).val());
             $( "#amount2 ").val($('#' +inputId).val());
             $( "#amount" ).val("The threshold is " + $('#' +inputId).val() + " kpb.");
