@@ -10,7 +10,6 @@ goog.provide('epiviz.ui.charts.decoration.UpdateWidthButton');
  * @constructor
  */
 epiviz.ui.charts.decoration.UpdateWidthButton = function(visualization, otherDecoration, config, overrides) {
-    console.log("+++++++++ updateWidth Button ++++++++++++");
     epiviz.ui.charts.decoration.ChartOptionButton.call(this, visualization, otherDecoration, config, overrides);
 };
 
@@ -26,134 +25,37 @@ epiviz.ui.charts.decoration.UpdateWidthButton.constructor = epiviz.ui.charts.dec
  */
 epiviz.ui.charts.decoration.UpdateWidthButton.prototype._click = function() {
 
-   /* var self = this;
-    return function(){
-        //THIS NEEDS TO BE INSIDE THE FUNCTION
-        alert("AH YEAH!");
-        alert("HEHEHEHE")
-        //console.log("Fire the update width!");
-        //alert(self.visualization().measurements().first().datasource().id());
-        self.visualization().onUpdateWidth().notify(new epiviz.ui.charts.VisEventArgs(self.visualization().id(),
-            {min: 5, max: 20, datasource: self.visualization().measurements().first().datasource().id()})); //datasource: self.visualization().measurements().first().datasource().id()}));
-        //5, max: 10)); self.visualization().id()));
-    };*/
-
     var self = this;
-    //console.log("ME SELF");
-    //console.log(self);
-    //console.log(self._threshold);
+
     return function(){
-
-       // console.log("HAAHAHAHAHAHAHA");
-       // console.log(self.visualization().properties().customSettingsDefs);
-       // console.log("--------------");
-       // console.log(self.visualization().customSettingsValues());
-       // console.log("2222-------------------2222");
-       // console.log(self._threshold);
-
-       /* alert(self.visualization().measurements().first().datasource().id());
-        alert(self.visualization().measurements().first().datasource().threshold());
-        console.log(self);
-        console.log("************");
-        console.log(self.overrides());
-        console.log(self.visualization());
-        console.log(self.visualization().measurements()); */
 
         var m = self.visualization().measurements().first();
-
-        console.log(m);
-        console.log("update-width-button-measurements-time!");
-        console.log(self.visualization().measurements());
-
         allM = self.visualization().measurements();
 
-        console.log("THE OVERRIDES IS:");
-        console.log(self.overrides());
         var threshold = {};
         allM.foreach(function(m){
-            //console.log(m.datasource().id());
-            //console.log(m.datasource().name());
             threshold[m.datasource().name()] = {};
             if(self.overrides().contains(m)){
                 var overrides = self._overrides.get(m);
-
                 threshold[m.datasource().name()]["threshold"] = overrides["threshold"];
-                /*if(Object.keys(threshold).length != 0) {
-                    if(threshold["threshold"] > overrides["threshold"]) {
-                        threshold["threshold"] = overrides["threshold"];
-                    }
-                }else{
-                    threshold["threshold"] = overrides["threshold"];
-                }*/
             }else{
                 threshold[m.datasource().name()]["threshold"] = 0;
             }
         });
 
-        console.log("the threshold is:");
-        console.log(threshold);
-        console.log("-----------------------------------");
-
-        /*
-        y.foreach(function(m){
-            console.log(m);
-            console.log(m.datasourceGroup());
-            e.datasource = m.datasourceGroup();
-        });*/
-
-        /*console.log(m);
-        console.log("*************");
-        alert(self.overrides().contains(m));*/
-
-/*
-        var threshold = {};
-        if(self.overrides().contains(m)){
-            var overrides = self._overrides.get(m);
-            threshold["threshold"] = overrides["threshold"];
-        }else{
-            threshold["threshold"] = 0;
-        }*/
-
         var UpdateWidthDialog = new epiviz.ui.controls.UpdateWidthDialog(
             'Threshold Menu!', {
                 ok: function(updateWidthValues) {
-                    // alert(updateWidthValues);
-                    // alert(updateWidthValues['threshold']);
-                    //TODO: Copy the notify on line 35 here and change min and max to threshold
-                    //TODO: Also change epivizr to accept threshold
-                    //alert(self.visualization().measurements().first().datasource().threshold());
-                    //self.visualization().measurements().first().datasource().setThreshold(updateWidthValues['threshold']);
-                    //var m = self.visualization().measurements().first();
-
-                    console.log("LETS GET THIS GOING!");
-                    console.log(updateWidthValues);
-
                     allM.foreach(function(m){
-                        console.log("I'm in the loop!");
-                        console.log(m);
                         if (!self.overrides().contains(m)) {
                             self._overrides.put(m, {});
                         }
                         var overrides = self._overrides.get(m);
-                        console.log(updateWidthValues[m.datasource().name()]);
-                        overrides['threshold'] = updateWidthValues[m.datasource().name()]; //updateWidthValues['threshold'];
+                        overrides['threshold'] = updateWidthValues[m.datasource().name()];
 
                         self.visualization().onUpdateWidth().notify(new epiviz.ui.charts.VisEventArgs(self.visualization().id(),
-                            {min: 5, max: 20, threshold: updateWidthValues[m.datasource().name()] * 1000/*updateWidthValues['threshold']*/, datasource: m.datasource().id()}));
+                            {threshold: updateWidthValues[m.datasource().name()] * 1000, datasource: m.datasource().id()}));
                     });
-
-                    /*
-                    if (!self.overrides().contains(m)) {
-                       self._overrides.put(m, {});
-                     }
-                    var overrides = self._overrides.get(m);
-                    overrides['threshold'] = updateWidthValues['threshold'];
-                    */
-
-                    //console.log(CustomSettings);
-                    //console.log(self.visualization().properties().customSettingsDefs)
-                    //console.log(self.visualization().customSettingsValues());
-                    //self.visualization().setCustomSettingsValues(settingsValues);
                 },
                 cancel: function() {}
             },

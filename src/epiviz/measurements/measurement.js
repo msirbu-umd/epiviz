@@ -299,8 +299,6 @@ epiviz.measurements.Measurement.prototype.metadata = function() {
  * @returns {boolean}
  */
 epiviz.measurements.Measurement.prototype.canFilter = function() {
-  //console.log("HERE!");
-  //console.log(this._canFilter);
   return this._canFilter || false;
 };
 

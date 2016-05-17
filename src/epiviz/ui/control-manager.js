@@ -460,8 +460,6 @@ epiviz.ui.ControlManager.prototype._initializeChartMenus = function() {
   var self = this;
   var visMenu = $('#vis-menu');
 
-  console.log("Inside control-manager.js");
-
   $('#vis-menu-button')
     .button({
       text: false,

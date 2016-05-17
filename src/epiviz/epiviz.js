@@ -181,8 +181,6 @@ epiviz.EpiViz.prototype.config = function() {
  */
 epiviz.EpiViz.prototype._addChart = function(type, visConfigSelection, chartId, chartProperties) {
 
-  console.log("I'm here in addChart!");
-
   chartId = this._chartManager.addChart(type, visConfigSelection, chartId, chartProperties);
   var self = this;
   // TODO: Maybe later implement hierarchical display type (see display-type.js for the start of the idea)
@@ -486,15 +484,8 @@ epiviz.EpiViz.prototype._registerChartPropagateHierarchySelection = function() {
 epiviz.EpiViz.prototype._registerChartUpdateWidth = function() {
   var self = this;
   this._chartManager.onChartUpdateWidthEvent().addListener(new epiviz.events.EventListener(function(e){
-    console.log("Epiviz.js inside")
-    console.log(e);
-    //console.log("------");
-    /** @type {Object.<string, epiviz.measurements.MeasurementSet>} */
-    var chartMeasurementsMap = self._chartManager.chartsMeasurements();
-    // console.log("EPVIZ.JS")
-    console.log(chartMeasurementsMap);
-    // console.log("--------")
 
+    /** @type {Object.<string, epiviz.measurements.MeasurementSet>} */
     self._dataManager.updateWidth(e);
   }));
 };
@@ -649,8 +640,6 @@ epiviz.EpiViz.prototype._registerDataRedraw = function() {
      * @param {{result: epiviz.events.EventResult}} e
      */
     function(e) {
-     console.log("EPIVIZ IS BEING SUMMONED FOR REDRAW!");
-     // console.log(e);
       try {
         var currentLocation = self._locationManager.currentLocation();
         self._locationManager.changeCurrentLocation(currentLocation);
@@ -769,7 +758,6 @@ epiviz.EpiViz.prototype._registerLocationChanged = function() {
      */
     function(e) {
 
-      console.log("Inside Epiviz onCurrentLocationChanged");
       self._chartManager.dataWaitStart(undefined,
         /**
          * @param {epiviz.ui.charts.Visualization} chart
@@ -782,10 +770,8 @@ epiviz.EpiViz.prototype._registerLocationChanged = function() {
       /** @type {Object.<string, epiviz.measurements.MeasurementSet>} */
       var chartMeasurementsMap = self._chartManager.chartsMeasurements();
 
-      //console.log(self._dataManager);
       self._dataManager.getData(e.newValue, chartMeasurementsMap,
-        function(chartId, data) {
-          //console.log("Inside of epiviz getData");
+        function(chartId, data) {;
           self._chartManager.updateCharts(e.newValue, data, [chartId]);
         });
     }));

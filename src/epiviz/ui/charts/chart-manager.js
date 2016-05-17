@@ -12,7 +12,6 @@ goog.provide('epiviz.ui.charts.ChartManager');
  */
 epiviz.ui.charts.ChartManager = function(config, overrides) {
 
-  console.log("+++++++++ Chart Manager ++++++++++++");
   /**
    * @type {epiviz.Config}
    * @private
@@ -210,9 +209,6 @@ epiviz.ui.charts.ChartManager.prototype.addChart = function(chartType, visConfig
   this._registerChartUpdateWidthEvent(chart);
 
   if (chartType.decorations()) {
-    console.log("AAAACCCCCCKKKKKKKKK");
-    console.log(chartType);
-    console.log(chartType.decorations());
     /** @type {epiviz.ui.charts.decoration.VisualizationDecoration} */
     var topDecoration = undefined;
 
@@ -238,24 +234,6 @@ epiviz.ui.charts.ChartManager.prototype.addChart = function(chartType, visConfig
 
         if(! canFilter) {continue; }
       }
-      /*
-      if(chartType.decorations()[i] == "epiviz.ui.charts.decoration.UpdateWidthButton" &&
-      !(chartType instanceof epiviz.plugins.charts.BlocksTrackType)){ continue; }
-
-
-      allM = visConfigSelection.visualization().measurements();
-      if(chartType.decorations()[i] == "epiviz.ui.charts.decoration.UpdateWidthButton" &&
-      !(visConfigSelection.measurements.first().epivizrBound())){ continue; }*/
-
-      /** @type {epiviz.ui.charts.decoration.VisualizationDecoration} */
-      //topDecoration  = epiviz.utils.applyConstructor(decorationCtor, [chart, topDecoration, this._config]);
-      /*alert(this._measurementOverrides);*/
-     /* console.log("****%%%%%%*****");
-      console.log(this._measurementOverrides);
-      console.log(this._config);
-      console.log(decorationCtor);
-      console.log("****%%%%%%*****");*/
-
 
       topDecoration  = epiviz.utils.applyConstructor(decorationCtor, [chart, topDecoration, this._config, this._measurementOverrides]);
     }
@@ -671,31 +649,7 @@ epiviz.ui.charts.ChartManager.prototype._registerChartPropagateHierarchyChanges 
 
 epiviz.ui.charts.ChartManager.prototype._registerChartUpdateWidthEvent = function(chart) {
   var self = this;
-  //alert("WHAT UP!! -- In Chart Manager")
-  //console.log("YEAAAHHH");
-  //console.log(chart);
-  //console.log("--------");
   chart.onUpdateWidth().addListener(new epiviz.events.EventListener(function(e) {
-   // console.log("in chart manager")
-   // console.log(chart);
-   // console.log(chart.properties);
-   // console.log("--------")
-   // console.log(chart);
-   // console.log(e);
-   // console.log(self._charts);
-   // console.log(e.id);
-   // console.log(self._charts[e.id]);
-   // console.log(self._charts[e.id].measurements());
-   // y = self._charts[e.id].measurements();
-
-    /*y.foreach(function(m){
-      console.log(m);
-      console.log(m.datasourceGroup());
-      e.datasource = m.datasourceGroup();
-    });*/
-   // console.log(self._charts[e.id].measurements().componentMeasurements());
-    //console.log(e);
-    //console.log("LOOK ABOVE ARRRGGGHHHH");
     self._chartUpdateWidthEvent.notify(e);
   }));
 };
